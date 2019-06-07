@@ -15,6 +15,7 @@ import { DisableCommenting } from "./DisableCommenting";
 import { FacebookAuthIntegration } from "./FacebookAuthIntegration";
 import { Flag } from "./Flag";
 import { GoogleAuthIntegration } from "./GoogleAuthIntegration";
+import { Invite } from "./Invite";
 import { ModerationQueue } from "./ModerationQueue";
 import { ModerationQueues } from "./ModerationQueues";
 import { Mutation } from "./Mutation";
@@ -45,6 +46,7 @@ const Resolvers: GQLResolver = {
   FacebookAuthIntegration,
   Flag,
   GoogleAuthIntegration,
+  Invite,
   ModerationQueue,
   ModerationQueues,
   Mutation,

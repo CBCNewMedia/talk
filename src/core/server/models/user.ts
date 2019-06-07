@@ -362,7 +362,13 @@ function hashPassword(password: string): Promise<string> {
 
 export type InsertUserInput = Omit<
   User,
-  "id" | "tenantID" | "tokens" | "status" | "ignoredUsers" | "createdAt"
+  | "id"
+  | "tenantID"
+  | "tokens"
+  | "status"
+  | "ignoredUsers"
+  | "emailVerificationID"
+  | "createdAt"
 >;
 
 export async function insertUser(

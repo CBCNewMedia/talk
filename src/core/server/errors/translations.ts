@@ -44,4 +44,5 @@ export const ERROR_TRANSLATIONS: Record<ERROR_CODES, string> = {
   PASSWORD_RESET_TOKEN_EXPIRED: "error-passwordResetTokenExpired",
   EMAIL_CONFIRM_TOKEN_EXPIRED: "error-emailConfirmTokenExpired",
   RATE_LIMIT_EXCEEDED: "error-rateLimitExceeded",
+  INVITE_TOKEN_EXPIRED: "error-inviteTokenExpired",
 };
