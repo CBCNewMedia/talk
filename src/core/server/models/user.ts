@@ -31,15 +31,15 @@ import {
 } from "coral-server/models/helpers/indexing";
 import Query from "coral-server/models/helpers/query";
 import { TenantResource } from "coral-server/models/tenant";
+
+import { createCollection } from "./helpers/collection";
 import {
   Connection,
   ConnectionInput,
   resolveConnection,
 } from "./helpers/connection";
 
-function collection(mongo: Db) {
-  return mongo.collection<Readonly<User>>("users");
-}
+const collection = createCollection<User>("users");
 
 export interface LocalProfile {
   type: "local";

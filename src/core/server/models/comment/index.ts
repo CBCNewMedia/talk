@@ -12,6 +12,7 @@ import {
   EncodedCommentActionCounts,
   mergeCommentActionCounts,
 } from "coral-server/models/action/comment";
+import { createCollection } from "coral-server/models/helpers/collection";
 import {
   Connection,
   createConnection,
@@ -32,9 +33,7 @@ import { VISIBLE_STATUSES } from "./constants";
 import { createEmptyCommentStatusCounts, hasAncestors } from "./helpers";
 import { CommentTag } from "./tag";
 
-function collection(mongo: Db) {
-  return mongo.collection<Readonly<Comment>>("comments");
-}
+const collection = createCollection<Comment>("comments");
 
 /**
  * Revision stores a Comment's body for a specific edit. Actions can be tied to

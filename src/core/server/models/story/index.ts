@@ -21,6 +21,7 @@ import Query from "coral-server/models/helpers/query";
 import { TenantResource } from "coral-server/models/tenant";
 
 import { createEmptyCommentStatusCounts } from "../comment/helpers";
+import { createCollection } from "../helpers/collection";
 import {
   createEmptyCommentModerationQueueCounts,
   StoryCommentCounts,
@@ -29,9 +30,7 @@ import {
 // Export everything under counts.
 export * from "./counts";
 
-function collection<T = Story>(mongo: Db) {
-  return mongo.collection<Readonly<T>>("stories");
-}
+const collection = createCollection<Story>("stories");
 
 export type StorySettings = DeepPartial<GQLStorySettings>;
 
