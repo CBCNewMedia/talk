@@ -1,6 +1,6 @@
 import { GQLCommentCountsTypeResolver } from "coral-server/graph/tenant/schema/__generated__/types";
 import { VISIBLE_STATUSES } from "coral-server/models/comment/constants";
-import { CommentStatusCounts } from "coral-server/models/story";
+import { CommentStatusCounts } from "coral-server/models/comment/helpers";
 
 export const CommentCounts: GQLCommentCountsTypeResolver<
   CommentStatusCounts

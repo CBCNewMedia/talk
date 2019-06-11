@@ -27,8 +27,9 @@ import {
 } from "coral-server/models/helpers/indexing";
 import Query from "coral-server/models/helpers/query";
 import { TenantResource } from "coral-server/models/tenant";
+
 import { VISIBLE_STATUSES } from "./constants";
-import { hasAncestors } from "./helpers";
+import { createEmptyCommentStatusCounts, hasAncestors } from "./helpers";
 import { CommentTag } from "./tag";
 
 function collection(mongo: Db) {
@@ -168,6 +169,13 @@ export async function createCommentIndexes(mongo: Db) {
   await variants(createIndex, {
     tenantID: 1,
     storyID: 1,
+    status: 1,
+  });
+
+  // Moderation based Comment Connection pagination.
+  // { storyID, ...connectionParams }
+  await variants(createIndex, {
+    tenantID: 1,
     status: 1,
   });
 
@@ -882,4 +890,43 @@ export function getLatestRevision(
   comment: Pick<Comment, "revisions">
 ): Revision {
   return comment.revisions[comment.revisions.length - 1];
+}
+
+export async function retrieveRecentStatusCounts(
+  mongo: Db,
+  tenantID: string,
+  since: Date,
+  filter: CommentConnectionInput["filter"]
+) {
+  // Get all the statuses for the given date stamp.
+  const cursor = await collection<{ _id: GQLCOMMENT_STATUS; count: number }>(
+    mongo
+  ).aggregate([
+    {
+      $match: {
+        ...filter,
+        tenantID,
+        createdAt: {
+          $gte: since,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$status",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  // Get all of the statuses.
+  const docs = await cursor.toArray();
+
+  // Iterate over the docs to increment the status counts.
+  const counts = createEmptyCommentStatusCounts();
+  for (const doc of docs) {
+    counts[doc._id] = doc.count;
+  }
+
+  return counts;
 }

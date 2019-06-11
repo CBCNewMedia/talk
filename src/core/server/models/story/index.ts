@@ -20,9 +20,9 @@ import {
 import Query from "coral-server/models/helpers/query";
 import { TenantResource } from "coral-server/models/tenant";
 
+import { createEmptyCommentStatusCounts } from "../comment/helpers";
 import {
   createEmptyCommentModerationQueueCounts,
-  createEmptyCommentStatusCounts,
   StoryCommentCounts,
 } from "./counts";
 
