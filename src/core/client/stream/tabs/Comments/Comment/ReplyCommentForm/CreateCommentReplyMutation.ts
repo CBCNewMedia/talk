@@ -199,7 +199,7 @@ function commit(
               },
             },
             tags: roleIsAtLeast(viewer.role, GQLUSER_ROLE.STAFF)
-              ? [{ name: "Staff" }]
+              ? [{ code: "Staff", name: "Staff" }]
               : [],
             viewerActionPresence: {
               reaction: false,
