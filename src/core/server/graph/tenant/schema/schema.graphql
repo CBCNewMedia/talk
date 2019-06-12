@@ -2055,6 +2055,7 @@ type Story {
     orderBy: COMMENT_SORT = CREATED_AT_DESC
     after: Cursor
     tag: String
+    flatten: Boolean = false
   ): CommentsConnection!
 
   """
