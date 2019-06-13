@@ -57,62 +57,6 @@ class SignIn extends React.Component {
         {errorMessage && <Alert>{errorMessage}</Alert>}
         <div>
           <External slot="authExternalSignIn" />
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              id="email"
-              type="email"
-              label={t('talk-plugin-auth.login.email')}
-              value={email}
-              style={{ fontSize: 16 }}
-              onChange={this.handleEmailChange}
-            />
-            <TextField
-              id="password"
-              type="password"
-              label={t('talk-plugin-auth.login.password')}
-              value={password}
-              style={{ fontSize: 16 }}
-              onChange={this.handlePasswordChange}
-            />
-            {requireRecaptcha && (
-              <div className={styles.recaptcha}>
-                <Recaptcha
-                  className={styles.recaptcha}
-                  ref={this.handleRecaptchaRef}
-                  onVerify={this.props.onRecaptchaVerify}
-                  size="compact"
-                />
-              </div>
-            )}
-            <div className={styles.action}>
-              {!loading ? (
-                <Button
-                  id="coralLogInButton"
-                  type="submit"
-                  cStyle="black"
-                  className={styles.signInButton}
-                  full
-                >
-                  {t('talk-plugin-auth.login.sign_in')}
-                </Button>
-              ) : (
-                <Spinner />
-              )}
-            </div>
-          </form>
-        </div>
-        <div className={cn(styles.footer, 'footer')}>
-          <span>
-            <a onClick={this.handleForgotPasswordLink}>
-              {t('talk-plugin-auth.login.forgot_your_pass')}
-            </a>
-          </span>
-          <span>
-            {t('talk-plugin-auth.login.need_an_account')}
-            <a onClick={this.handleSignUpLink} id="coralRegister">
-              {t('talk-plugin-auth.login.register')}
-            </a>
-          </span>
         </div>
       </div>
     );
